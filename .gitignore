@@ -28,3 +28,6 @@ Thumbs.db
 .classpath
 .project
 .settings/
+
+# Employee Data 
+employeedb.csv
