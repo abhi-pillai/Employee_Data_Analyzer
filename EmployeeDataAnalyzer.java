@@ -1,38 +1,50 @@
 import java.util.List;
+import java.util.Scanner;
 
 public class EmployeeDataAnalyzer {
     public static void main(String[] args) {
         EmployeeManager employeeManager = new EmployeeManager();
-        System.out.println("Enter employee data (ID, Name, Department, Salary). Type 'done' to finish:");
-        employeeManager.readEmployeeData();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("-----------Welcome to the Employee Data Analyzer!-----------");
+        System.out.println("Enter 1. Insert Employee Data\nEnter 2. Display All Employees\nEnter 3. Filter Employees\nEnter 4. Sort Employees\nEnter 5. Find Employee by ID\nEnter 6. Exit");
+        int choice = sc.nextInt();
+        sc.nextLine(); // Consume newline
         
-
-        // Simulate multithreading: Processing employee by ID
-        Thread processor1 = new EmployeeProcessor(employeeManager, 1);
-        Thread processor2 = new EmployeeProcessor(employeeManager, 2);
-        Thread processor3 = new EmployeeProcessor(employeeManager, 5);
-
-        processor1.start();
-        processor2.start();
-        processor3.start();
-
-        // Wait for threads to complete
-        try {
-            processor1.join();
-            processor2.join();
-            processor3.join();
-        } catch (InterruptedException e) {
-            System.out.println("Error waiting for thread completion: " + e.getMessage());
+        switch (choice) {
+            case 1:
+                System.out.println("Enter employee data (ID, Name, Department, Salary). Type 'done' to finish:");
+                employeeManager.readEmployeeData(sc);
+                break;
+            case 2:
+                System.out.println("All Employees:");
+                employeeManager.getAllEmployees().forEach(System.out::println);
+                break;
+            case 3:
+                System.out.println("Enter minimum salary to filter employees:");
+                double minSalary = sc.nextDouble();
+                sc.nextLine(); // Consume newline
+                List<Employee> filteredEmployees = employeeManager.filterEmployeesBySalary(minSalary);
+                System.out.println("Employees with salary >= " + minSalary + ":");
+                filteredEmployees.forEach(System.out::println);
+                break;
+            case 4:
+                System.out.println("Employees sorted by salary:");
+                List<Employee> sortedEmployees = employeeManager.sortEmployeesBySalary();
+                sortedEmployees.forEach(System.out::println);
+                break;
+            case 5:
+                System.out.println("Enter employee ID to find:");
+                int id = sc.nextInt();
+                sc.nextLine(); // Consume newline
+                EmployeeProcessor processor = new EmployeeProcessor(employeeManager, id);
+                processor.start();
+                break;
+            case 6:
+                System.out.println("Exiting the Employee Data Analyzer.");
+                return;
+            default:
+                System.out.println("Invalid choice. Please try again.");
         }
 
-        // Filtering employees based on salary
-        System.out.println("\nEmployees with salary >= 70000:");
-        List<Employee> highEarners = employeeManager.filterEmployeesBySalary(70000.0);
-        highEarners.forEach(System.out::println);
-
-        // Sorting employees by salary
-        System.out.println("\nEmployees sorted by salary:");
-        List<Employee> sortedEmployees = employeeManager.sortEmployeesBySalary();
-        sortedEmployees.forEach(System.out::println);
     }
 }

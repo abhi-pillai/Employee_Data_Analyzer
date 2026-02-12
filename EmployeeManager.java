@@ -8,8 +8,7 @@ public class EmployeeManager {
         this.employeeData = new HashMap<>();
     }
 
-    public void readEmployeeData() {
-        Scanner sc = new Scanner(System.in);
+    public void readEmployeeData(Scanner sc) {
         while (true) {
             String input = sc.nextLine();
             if (input.equalsIgnoreCase("done")) {
