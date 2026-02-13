@@ -164,7 +164,7 @@ Filtering options:
 2. Filter by Department
 1
 Enter salary to filter: 80000
-ID: 101   | Name: Alice Johnson  | Salary: 85000.00
+ID: 101   | Name: Alice Johnson  | Salary: 80000.00
 ```
 
 ## Error Handling

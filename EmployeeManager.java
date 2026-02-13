@@ -90,7 +90,7 @@ public class EmployeeManager {
     
     public List<Employee> filterEmployeesBySalary(double salary) {
         return employeeData.values().stream()
-                .filter(employee -> employee.getSalary().orElse(0.0) > salary)
+                .filter(employee -> employee.getSalary().orElse(0.0) == salary)
                 .collect(Collectors.toList());
     }
 
