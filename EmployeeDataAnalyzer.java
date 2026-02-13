@@ -24,9 +24,10 @@ public class EmployeeDataAnalyzer {
                 case 2:
                     System.out.println("All Employees:");
                     employeeManager.getAllEmployees().forEach(employee ->
-                        System.out.printf("ID: %-5d | Name: %-15s | Salary: %.2f%n",
+                        System.out.printf("ID: %-5d | Name: %-15s | Department: %-15s | Salary: %.2f%n",
                                         employee.getId(),
                                         employee.getName(),
+                                        employee.getDepartment(),
                                         employee.getSalary().orElse(0.0))
                         );
                     break;
@@ -51,9 +52,10 @@ public class EmployeeDataAnalyzer {
                     System.out.print("Enter Employee ID to search: ");
                     int searchId = sc.nextInt();
                     employeeManager.getEmployeeById(searchId).ifPresentOrElse(
-                            emp -> System.out.printf("ID: %-5d | Name: %-15s | Salary: %.2f%n",
+                            emp -> System.out.printf("ID: %-5d | Name: %-15s | Department: %-15s | Salary: %.2f%n",
                                         emp.getId(),
                                         emp.getName(),
+                                        emp.getDepartment(),
                                         emp.getSalary().orElse(0.0))
                         ,
                             () -> System.out.println("Employee with ID " + searchId + " not found.")
@@ -67,9 +69,10 @@ public class EmployeeDataAnalyzer {
                         System.out.print("Enter salary to filter: ");
                         double salary = sc.nextDouble();
                         employeeManager.filterEmployeesBySalary(salary).forEach(employee ->
-                            System.out.printf("ID: %-5d | Name: %-15s | Salary: %.2f%n",
+                            System.out.printf("ID: %-5d | Name: %-15s | Department: %-15s | Salary: %.2f%n",
                                             employee.getId(),
                                             employee.getName(),
+                                            employee.getDepartment(),
                                             employee.getSalary().orElse(0.0))
                             );
                     } else if (filterChoice == 2) {
@@ -89,9 +92,10 @@ public class EmployeeDataAnalyzer {
                 case 7:
                     System.out.println("Employees sorted by salary:"); 
                     employeeManager.sortEmployeesBySalary().forEach(employee ->
-                        System.out.printf("ID: %-5d | Name: %-15s | Salary: %.2f%n",
+                        System.out.printf("ID: %-5d | Name: %-15s | Department: %-15s | Salary: %.2f%n",
                                         employee.getId(),
                                         employee.getName(),
+                                        employee.getDepartment(),
                                         employee.getSalary().orElse(0.0))
                         );
                     break;
