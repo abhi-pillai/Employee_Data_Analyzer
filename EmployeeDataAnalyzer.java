@@ -22,8 +22,11 @@ public class EmployeeDataAnalyzer {
                     break;
                 case 2:
                     System.out.println("All Employees:");
+                    System.out.println("--------------------------------------------------------------------------------");
+                    System.out.printf("%-5s | %-15s | %-15s | %-10s%n", "ID", "Name", "Department", "Salary");
+                    System.out.println("--------------------------------------------------------------------------------");
                     employeeManager.getAllEmployees().forEach(employee ->
-                        System.out.printf("ID: %-5d | Name: %-15s | Department: %-15s | Salary: %.2f%n",
+                        System.out.printf("%-5d | %-15s | %-15s | %.2f%n",
                                         employee.getId(),
                                         employee.getName(),
                                         employee.getDepartment(),
